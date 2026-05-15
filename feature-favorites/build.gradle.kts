@@ -1,22 +1,19 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
 }
 
 android {
-    namespace = "com.dianna.coursesapp"
+    namespace = "com.dianna.feature_favorites"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "com.dianna.coursesapp"
         minSdk = 24
-        targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -41,17 +38,6 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
-
-    implementation(project(":core"))
-    implementation(project(":domain"))
-    implementation(project(":data"))
-    implementation(project(":feature-auth"))
-    implementation(project(":feature-courses"))
-    implementation(project(":feature-favorites"))
-    implementation(project(":feature-profile"))
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
