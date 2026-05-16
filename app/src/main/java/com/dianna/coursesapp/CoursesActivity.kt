@@ -6,11 +6,16 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CoursesActivity : Activity() {
 
     private lateinit var coursesRecyclerView: RecyclerView
     private lateinit var adapter: CourseAdapter
+    private var courses: List<Course> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,12 +27,9 @@ class CoursesActivity : Activity() {
         val favoritesMenuText = findViewById<TextView>(R.id.favoritesMenuText)
         val profileMenuText = findViewById<TextView>(R.id.profileMenuText)
 
-        val courses = CoursesRepository.getCourses().toMutableList()
-
-        adapter = CourseAdapter(courses)
-
         coursesRecyclerView.layoutManager = LinearLayoutManager(this)
-        coursesRecyclerView.adapter = adapter
+
+        loadCourses()
 
         sortText.setOnClickListener {
             val sortedCourses = courses.sortedByDescending { it.publishDate }
@@ -43,6 +45,21 @@ class CoursesActivity : Activity() {
         profileMenuText.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    private fun loadCourses() {
+        CoroutineScope(Dispatchers.Main).launch {
+            courses = try {
+                withContext(Dispatchers.IO) {
+                    RetrofitClient.api.getCourses().courses
+                }
+            } catch (exception: Exception) {
+                CoursesRepository.getCourses()
+            }
+
+            adapter = CourseAdapter(courses)
+            coursesRecyclerView.adapter = adapter
         }
     }
 }

@@ -18,11 +18,12 @@
 
     <TextView
         android:id="@+id/likeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_gravity="end"
-        android:text="♥"
-        android:textColor="#FF5E7A"
+        android:clickable="true"
+        android:gravity="center"
+        android:text=""
         android:textSize="20sp"
         android:textStyle="bold" />
 

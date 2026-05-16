@@ -6,15 +6,20 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FavoritesActivity : Activity() {
+
+    private lateinit var favoritesRecyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_favorites)
 
-        val favoritesRecyclerView =
-            findViewById<RecyclerView>(R.id.favoritesRecyclerView)
+        favoritesRecyclerView = findViewById(R.id.favoritesRecyclerView)
 
         val homeMenuText =
             findViewById<TextView>(R.id.homeMenuText)
@@ -22,14 +27,10 @@ class FavoritesActivity : Activity() {
         val profileMenuText =
             findViewById<TextView>(R.id.profileMenuText)
 
-        val favoriteCourses =
-            CoursesRepository.getFavoriteCourses()
-
         favoritesRecyclerView.layoutManager =
             LinearLayoutManager(this)
 
-        favoritesRecyclerView.adapter =
-            CourseAdapter(favoriteCourses)
+        loadFavorites()
 
         homeMenuText.setOnClickListener {
             val intent = Intent(this, CoursesActivity::class.java)
@@ -40,5 +41,38 @@ class FavoritesActivity : Activity() {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadFavorites()
+    }
+
+    private fun loadFavorites() {
+        CoroutineScope(Dispatchers.Main).launch {
+            val favoriteCourses = withContext(Dispatchers.IO) {
+                DatabaseProvider
+                    .getDatabase(this@FavoritesActivity)
+                    .favoriteCourseDao()
+                    .getAllFavorites()
+                    .map { it.toCourse() }
+            }
+
+            favoritesRecyclerView.adapter =
+                CourseAdapter(favoriteCourses)
+        }
+    }
+
+    private fun FavoriteCourseEntity.toCourse(): Course {
+        return Course(
+            id = id,
+            title = title,
+            text = text,
+            price = price,
+            rate = rate,
+            startDate = startDate,
+            hasLike = true,
+            publishDate = publishDate
+        )
     }
 }
