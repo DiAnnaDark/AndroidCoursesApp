@@ -16,16 +16,13 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/likeText"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+    <ImageView
+        android:id="@+id/likeImage"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_gravity="end"
-        android:clickable="true"
-        android:gravity="center"
-        android:text=""
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="4dp"
+        android:src="@drawable/ic_bookmark_outline" />
 
     <TextView
         android:id="@+id/courseDescriptionText"
@@ -37,6 +34,16 @@
         android:text="Освойте backend-разработку и программирование на Java..."
         android:textColor="#BDBDBD"
         android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/courseStartDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Старт: 2026-05-22"
+        android:textColor="#9FA1B4"
+        android:textSize="12sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"

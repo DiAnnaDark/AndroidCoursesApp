@@ -1,9 +1,10 @@
 package com.dianna.coursesapp
 
-import android.graphics.Color
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
@@ -16,8 +17,9 @@ class CourseAdapter(
 
     class CourseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleText: TextView = view.findViewById(R.id.courseTitleText)
-        val likeText: TextView = view.findViewById(R.id.likeText)
+        val likeImage: ImageView = view.findViewById(R.id.likeImage)
         val descriptionText: TextView = view.findViewById(R.id.courseDescriptionText)
+        val startDateText: TextView = view.findViewById(R.id.courseStartDateText)
         val priceText: TextView = view.findViewById(R.id.coursePriceText)
         val rateText: TextView = view.findViewById(R.id.courseRateText)
         val detailsText: TextView = view.findViewById(R.id.detailsText)
@@ -35,15 +37,16 @@ class CourseAdapter(
 
         holder.titleText.text = course.title
         holder.descriptionText.text = course.text
+        holder.startDateText.text = "Старт: ${course.startDate}"
         holder.priceText.text = "${course.price} ₽"
         holder.rateText.text = "★ ${course.rate}"
         holder.detailsText.text = "Подробнее →"
 
-        updateLikeVisibility(holder, course)
+        updateLikeIcon(holder, course)
 
-        holder.likeText.setOnClickListener {
+        holder.likeImage.setOnClickListener {
             course.hasLike = !course.hasLike
-            updateLikeVisibility(holder, course)
+            updateLikeIcon(holder, course)
 
             CoroutineScope(Dispatchers.IO).launch {
                 val dao = DatabaseProvider
@@ -57,19 +60,29 @@ class CourseAdapter(
                 }
             }
         }
+
+        holder.detailsText.setOnClickListener {
+            val context = holder.itemView.context
+
+            val intent = Intent(context, CourseDetailsActivity::class.java)
+            intent.putExtra("title", course.title)
+            intent.putExtra("text", course.text)
+            intent.putExtra("price", course.price)
+            intent.putExtra("rate", course.rate)
+            intent.putExtra("startDate", course.startDate)
+
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int = courses.size
 
-    private fun updateLikeVisibility(holder: CourseViewHolder, course: Course) {
-        holder.likeText.visibility = View.VISIBLE
-        holder.likeText.text = "\u2764\uFE0E"
-
-        holder.likeText.setTextColor(
+    private fun updateLikeIcon(holder: CourseViewHolder, course: Course) {
+        holder.likeImage.setImageResource(
             if (course.hasLike) {
-                Color.parseColor("#FF5E7A")
+                R.drawable.ic_bookmark_filled
             } else {
-                Color.parseColor("#6F7078")
+                R.drawable.ic_bookmark_outline
             }
         )
     }
