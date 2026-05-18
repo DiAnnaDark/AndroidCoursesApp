@@ -3,6 +3,7 @@ package com.dianna.coursesapp
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,8 +25,8 @@ class CoursesActivity : Activity() {
         coursesRecyclerView = findViewById(R.id.coursesRecyclerView)
 
         val sortText = findViewById<TextView>(R.id.sortText)
-        val favoritesMenuText = findViewById<TextView>(R.id.favoritesMenuText)
-        val profileMenuText = findViewById<TextView>(R.id.profileMenuText)
+        val favoritesMenuText = findViewById<LinearLayout>(R.id.favoritesMenuText)
+        val profileMenuText = findViewById<LinearLayout>(R.id.profileMenuText)
 
         coursesRecyclerView.layoutManager = LinearLayoutManager(this)
 

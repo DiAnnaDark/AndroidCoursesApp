@@ -3,7 +3,7 @@ package com.dianna.coursesapp
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
@@ -22,10 +22,10 @@ class FavoritesActivity : Activity() {
         favoritesRecyclerView = findViewById(R.id.favoritesRecyclerView)
 
         val homeMenuText =
-            findViewById<TextView>(R.id.homeMenuText)
+            findViewById<LinearLayout>(R.id.homeMenuText)
 
         val profileMenuText =
-            findViewById<TextView>(R.id.profileMenuText)
+            findViewById<LinearLayout>(R.id.profileMenuText)
 
         favoritesRecyclerView.layoutManager =
             LinearLayoutManager(this)
