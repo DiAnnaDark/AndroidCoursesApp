@@ -1,74 +1,101 @@
-# AndroidCoursesApp
+AndroidCoursesApp
 
-Android application for browsing IT courses with favorites support and custom UI based on Figma design.
+Educational Android application built with Kotlin and Android SDK for browsing IT courses.
+
+The project was created as a practice-oriented mobile development project focused on:
+UI implementation from Figma,
+RecyclerView,
+Room Database,
+Retrofit integration,
+navigation,
+local persistence,
+and custom Android UI components.
 
 Features:
-- onboarding flow
-- registration and login screens
-- courses list screen
-- course details screen
-- favorites screen
-- profile screen
-- add and remove courses from favorites
-- Room database persistence
-- RecyclerView with custom course cards
-- bottom navigation
-- dynamic bookmark state
-- custom dark theme UI
+
+onboarding flow
+registration and login screens
+courses list screen
+course details screen
+favorites screen
+profile screen
+add and remove courses from favorites
+Room database persistence
+RecyclerView with custom course cards
+bottom navigation
+dynamic bookmark state
+custom dark theme UI
 
 Tech stack:
-- Kotlin
-- Android SDK
-- RecyclerView
-- Room Database
-- Coroutines
-- XML layouts
+
+Kotlin
+Android SDK
+RecyclerView
+Room Database
+Coroutines
+Retrofit
+XML layouts
 
 Architecture:
-- Activity-based navigation
-- Room DAO layer
-- local persistence for favorites
-- reusable RecyclerView adapter
+
+Activity-based navigation
+DAO layer for Room persistence
+local storage for favorites
+reusable RecyclerView adapter
 
 Run:
-1. Open project in Android Studio
-2. Sync Gradle
-3. Run on emulator or Android device
 
+Open project in Android Studio
+Sync Gradle
+Run on emulator or Android device
 
-# AndroidCoursesApp
+AndroidCoursesApp
 
-Android-приложение для просмотра IT-курсов с поддержкой избранного и кастомным интерфейсом по макету Figma.
+Учебное Android-приложение на Kotlin для просмотра IT-курсов.
+
+Проект создан в рамках практики мобильной разработки с упором на:
+реализацию UI по Figma-макету,
+RecyclerView,
+Room Database,
+Retrofit,
+навигацию,
+локальное хранение данных
+и кастомные Android UI-компоненты.
 
 Функционал:
-- онбординг
-- экраны регистрации и авторизации
-- список курсов
-- экран подробностей курса
-- экран избранного
-- экран профиля
-- добавление и удаление курсов из избранного
-- сохранение избранного через Room Database
-- RecyclerView с кастомными карточками
-- нижняя навигация
-- динамическое состояние bookmark
-- кастомный dark UI
+
+онбординг
+экраны регистрации и авторизации
+список курсов
+экран подробностей курса
+экран избранного
+экран профиля
+добавление и удаление курсов из избранного
+сохранение избранного через Room Database
+RecyclerView с кастомными карточками
+нижняя навигация
+динамическое состояние bookmark
+кастомный dark UI
 
 Стек:
-- Kotlin
-- Android SDK
-- RecyclerView
-- Room Database
-- Coroutines
-- XML layouts
+
+Kotlin
+Android SDK
+RecyclerView
+Room Database
+Coroutines
+Retrofit
+XML layouts
 
 Архитектура:
-- навигация на Activity
-- DAO слой для Room
-- локальное хранение избранного
-- переиспользуемый RecyclerView adapter
+
+навигация на Activity
+DAO слой для Room
+локальное хранение избранного
+переиспользуемый RecyclerView adapter
 
 Запуск:
-1. Открыть проект в Android Studio
-2. Выполнить Gradle Sync
-3. Запустить приложение на эмуляторе или устройстве
+
+Открыть проект в Android Studio
+Выполнить Gradle Sync
+Запустить приложение на эмуляторе или устройстве
